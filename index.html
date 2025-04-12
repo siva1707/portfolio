@@ -3,10 +3,410 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Personel Portfolio</title>
-
+        <title>Personal Portfolio</title>
+        <!-- <link rel="stylesheet" href="style.css"> -->
         <!-- CSS LINK-->
-        <link rel="stylesheet" href="style.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                font-family: 'helvetica', sans-serif;
+                list-style: none;
+                scroll-behavior: smooth;
+                text-decoration: none;
+            }
+
+            :root{
+                --bg-color: #fff;
+                --text-color: #000;
+                --second-color: #0c0d0d;
+                --main-color: #9e13cc;
+                --big-font: 5rem;
+                --h2-font: 3rem;
+                --p-font: 1.1rem;
+            }
+
+            body{
+                background: var(--bg-color);
+                color: var(--text-color)
+            }
+
+            header{
+                position: fixed;
+                width: 100%;
+                top: 0;
+                right: 0;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: transparent;
+                padding: 30px 18%;
+                transition: .3s;
+            }
+
+            .navlist{
+                display: flex;
+            }
+
+            .navlist li{
+                position: relative;
+            }
+
+            .navlist a{
+                font-size: var(--p-font);
+                text-decoration: none;
+                color: var(--text-color);
+                font-weight: 500;
+                padding: 10px 27px;
+            }
+
+            .navlist a::after{
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background: var(--main-color);
+                bottom: -3px;
+                left: 0;
+                transition: ease .40s;
+            }
+
+            .navlist a:hover::after{
+                width: 100%;
+            }
+
+            #menu-icon{
+                font-size: 35px;
+                color: var(--text-color);
+                z-index: 10001;
+                cursor: pointer;
+                display: none;
+            }
+
+            .top-btn{
+                display: inline-block;
+                padding: 9px 30px;
+                background: transparent;
+                border: 2px solid var(--main-color);
+                border-radius: 30px;
+                color: var(--text-color);
+                letter-spacing: 1px;
+                font-size: var(--p-font);
+                font-weight: 500;
+                transition: ease .50s;
+            }
+
+            .top-btn:hover{
+                transform: scale(1.1);
+                background: var(--main-color);
+                border: 2px solid var(--main-color);
+                color: var(--bg-color);
+            }
+
+            section{
+                padding: 100px 18%;
+            }
+
+            /* Updated home section for split screen */
+            .home{
+                min-height: 100vh;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding-top: 70px; /* Add space for header */
+            }
+
+            .home-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* Create two equal columns */
+                align-items: center;
+                width: 100%;
+                gap: 4rem;
+            }
+
+            .home-text {
+                padding-right: 20px;
+            }
+
+            .home-text h1{
+                margin: 10px 0px 25px;
+                font-size: var(--big-font);
+                line-height: 1;
+                font-weight: 500;
+            }
+
+            .home-text h5{
+                margin-bottom: 26px;
+                font-size: 19px;
+                font-weight: 500;
+            }
+
+            span{
+                color: var(--main-color);
+            }
+
+            .home-text h3{
+                color: var(--main-color);
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            .home-text p{
+                font-size: var(--p-font);
+                color: var(--second-color);
+                line-height: 28px;
+                margin-bottom: 20px;
+            }
+
+            .social a{
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(178, 46, 214);
+                font-size: 17px;
+                color: var(--bg-color);
+                margin-right: 22px;
+                margin-bottom: 30px;
+            }
+
+            .social a:hover{
+                transform: scale(1.1);
+                background: var(--main-color);
+                transition: .5s;
+            }
+
+            /* Updated profile image styles */
+            .profile-img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .profile-img img {
+                width: 350px;
+                height: 350px;
+                object-fit: cover;
+                border-radius: 50%;
+                box-shadow: 0 0 20px rgba(158, 19, 204, 0.3);
+                border: 3px solid var(--main-color);
+            }
+
+            .btn{
+                display: inline-block;
+                color: var(--bg-color);
+                background-color: var(--main-color);
+                font-size: var(--p-font);
+                padding: 10px 40px;
+                font-weight: 500;
+                line-height: 24px;
+                border-radius: 30px;
+                transition: ease .4s;
+            }
+
+            .btn:hover{
+                transform: scale(1.1);
+            }
+
+            header.sticky{
+                background: var(--bg-color);
+                padding: 13px 18%;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .about{
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .about-text h2{
+                font-size: var(--h2-font);
+                font-weight: 500;
+                margin: 8px 0px 25px;
+                line-height: 1.1;
+            }
+
+            .about-text h3{
+                color: var(--main-color);
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            .about-text p{
+                font-size: var(--p-font);
+                color: var(--second-color);
+                line-height: 28px;
+                margin-bottom: 45px;
+            }
+
+            .heading{
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .heading h2{
+                font-size: var(--h2-font);
+                font-weight: 500;
+                margin: 7px 0px 20px;
+                line-height: 1.1;
+            }
+
+            .cta-box{
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+                grid-gap: 2rem;
+                align-items: center;
+                text-align: center;
+            }
+
+            .wrap{
+                background: #fff;
+                box-shadow: 18px 0px 87px 0px rgba(10, 15, 70, 0.07);
+                border-radius: 12px;
+                padding: 50px 50px 50px 50px;
+                transition: ease .40s;
+                cursor: pointer;
+            }
+
+            .one{
+                background: #baebcd;
+            }
+
+            .two{
+                background: #d9d1fa;
+            }
+
+            .three{
+                background: #faedce;
+            }
+
+            .wrap h3{
+                font-size: 24px;
+                font-weight: 500;
+                margin-bottom: 2px;
+            }
+
+            .wrap p{
+                font-size: var(--p-font);
+            }
+
+            /* Contact section styling */
+            .contact {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .topic.con {
+                display: flex;
+                align-items: center;
+                margin: 15px 0;
+                font-size: 18px;
+            }
+
+            .topic.con img {
+                margin-right: 15px;
+            }
+   
+            /* Media queries */
+            @media (max-width: 1425px){
+                header{
+                    padding: 16px 3%;
+                    transition: .3s;
+                }
+                header.sticky {
+                    padding: 10px 3%;
+                    transition: .3s;
+                }
+                section{
+                    padding: 70px 3%;
+                    transition: .3s;
+                }
+                :root{
+                    --big-font: 4rem;
+                    --h2-font: 2.3rem;
+                    --p-font: 1rem;
+                    transition: .3s;
+                }
+            }
+
+            @media (max-width: 970px){
+                #menu-icon{
+                    display: block;
+                }
+                .navlist{
+                    position: absolute;
+                    top: -600px;
+                    left: 0;
+                    right: 0;
+                    flex-direction: column;
+                    background-color: var(--main-color);
+                    text-align: right;
+                    transition: all .40s;
+                }
+                .navlist a{
+                    display: block;
+                    padding: 1.2rem;
+                    margin: 1.5rem;
+                    border-right: 2px solid var(--bg-color);
+                    color: var(--bg-color)
+                }
+                .navlist a:hover{
+                    background: var(--bg-color);
+                    color: var(--main-color);
+                }
+                .navlist a::after{
+                    display: none;
+                }
+                .navlist.active{
+                    top: 100%;
+                }
+            }
+
+            @media (max-width: 800px){
+                .home-container{
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                }
+                .home-text{
+                    padding-top: 55px;
+                    text-align: center;
+                }
+                .profile-img{
+                    margin-top: 30px;
+                }
+                .profile-img img{
+                    width: 250px;
+                    height: 250px;
+                }
+                .about{
+                    grid-template-columns: 1fr;
+                }
+                :root{
+                    --big-font: 3.4rem;
+                    --h2-font: 2rem;
+                }
+                section{
+                    padding: 65px 3%;
+                    transition: .3s;
+                }
+            }
+
+            @media (max-width: 540px) {
+                .profile-img img {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        </style>
 
         <!--BOX ICONS LINK-->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -29,29 +429,37 @@
                 <li><a href="#Certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="https://drive.google.com/file/d/1T0HOQZ9BtNYvLjoPpGisaqF4l55pkRhZ/view?usp=drivesdk" class="top-btn">Download CV</a>
+            <a href="https://drive.google.com/file/d/1JjxZzpsQGQ2UIE76XpIQd4uWTrOpwrPO/view?usp=sharing" class="top-btn">Download CV</a>
         </header>
 
         <!--HOME-->
         <section class="home" id="home">
-            <div class="home-text">
-                <h2>Hello,I'm</h2>
-                <h1>Sivasundar</h1>
-                <h3>A Web Developer <span>From India</span></h3>
-                <br>
-                <p>I'm very passionate <br> and dedicated to my work.</p>
-                <div class="social">
-                    <a href="https://www.instagram.com/sk__siva__1707?igsh=cDI1emZxbDJoY2Fr"><i class="bx bxl-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/siva-sundar-298730304?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="bx bxl-linkedin"></i></a>
+            <div class="home-container">
+                <div class="home-text">
+                    <h2>Hello, I'm</h2>
+                    <h1>Sivasundar</h1>
+                    <h3>A Web Developer <span>From India</span></h3>
+                    <br>
+                    <p>I'm very passionate <br> and dedicated to my work.</p>
+                    <div class="social">
+                        <a href="https://www.instagram.com/sk__siva__1707?igsh=cDI1emZxbDJoY2Fr"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://www.linkedin.com/feed/?trk=sem-ga_campid.14650114788_asid.150089839322_crid.656569072783_kw.www%20linkedin_d.c_tid.kwd-2246447582_n.g_mt.e_geo.9061952"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Profile Image Div -->
+                <div class="profile-img">
+                    <img src="proflie.jpg" alt="Sivasundar Profile Picture">
                 </div>
             </div>
         </section>
+
         <!--ABOUT-->
         <section class="about" id="about">
             <div class="about-text">
                 <h1>I'm a Designer</h1>
                 <h2>I Can Design Anything You Want</h2>
-                <p>Hello! I am a passionate and dedicated web developer with a strong foundation in creating dynamic and responsive websites.I am eager to apply my knowledge and skills in a professional setting and am always looking to learn and grow in the field of web development. I am excited to contribute to innovative projects and work with a team to create impactful digital experiences.</p>
+                <p>Hello! I am a passionate and dedicated web developer with a strong foundation in creating dynamic and responsive websites. I am eager to apply my knowledge and skills in a professional setting and am always looking to learn and grow in the field of web development. I am excited to contribute to innovative projects and work with a team to create impactful digital experiences.</p>
                 <a href="#" class="btn">Hire Me</a>
             </div>
         </section>
@@ -62,36 +470,30 @@
                 <h2>My Skills</h2>
             </div>
 
-            
-                <div class="cta-box">
-                    <div class="wrap one">
-                        <h2>Languages Known</h2>
-                        <br>
-                        <p>C</p>
-                        <p>C++</p>
-                        <p>Python</p>
-                        <p>SQl</p>
-                        <p>
-                            Html,Css
-                        </p>
-                    </div>
-                
-                    <div class="wrap two">
-                        <h2>Qualities</h2>
-                        <br>
-                        <p>Leaderhsip</p>
-                        <p>Active Listening</p>
-                        <p>Problem Solving</p>
-                        <p>InterPersnal Communication</p>
-                        <br>
-                    </div>
-                   
+            <div class="cta-box">
+                <div class="wrap one">
+                    <h2>Languages Known</h2>
+                    <br>
+                    <p>C</p>
+                    <p>C++</p>
+                    <p>Python</p>
+                    <p>SQL</p>
+                    <p>HTML, CSS</p>
+                </div>
+                <div class="wrap two">
+                    <h2>Qualities</h2>
+                    <br>
+                    <p>Leadership</p>
+                    <p>Active Listening</p>
+                    <p>Problem Solving</p>
+                    <p>Interpersonal Communication</p>
+                    <br>
+                </div>
             </div>
         </section>
 
         <!--Certifications-->
         <section class="Certifications" id="Certifications">
-            
             <div class="heading">
                 <h2>Certifications</h2>
             </div>
@@ -99,8 +501,8 @@
             <div class="cta-box">
                 <div class="wrap one">
                     <h2>NPTEL</h2>
-                    <p>Iot</p>
-                    <p>IIot 4.0</p>
+                    <p>IoT</p>
+                    <p>IIoT 4.0</p>
                     <p>Cloud Computing</p>
                     <p>Privacy in Social Media</p>
                 </div>
@@ -109,14 +511,12 @@
                     <h2>INTERNSHIP</h2>
                     <br>
                     <p>WSA</p>
-                    <p>Mern Stack Development</p>
+                    <p>MERN Stack Development</p>
                     <br>
                 </div>
 
                 <div class="wrap three">
-                    <h2>
-                        Certificates
-                    </h2>
+                    <h2>Certificates</h2>
                     <br>
                     <p>C in Sololearn</p>
                     <p>Intercollege Event Participation</p>
@@ -130,25 +530,48 @@
                 <h2>Contact Me</h2>
             </div>
             <div class="topic con">
-                <img src="phone.png" height="30rem"width="30rem"alt>
+                <img src="phone.png" height="30rem" width="30rem" alt="">
                 9600145831
             </div>
             <div class="topic con">
-                <img src="mail.jpeg" height="30rem"width="30rem"alt>
+                <img src="mail.jpeg" height="30rem" width="30rem" alt="">
                 2212065@nec.edu.in
             </div>
             <div class="topic con">
-                <img src="insta.jpeg" height="30rem" width="30rem" alt>   
+                <img src="insta.jpeg" height="30rem" width="30rem" alt="">   
                 sk__siva__1707
             </div>
-           
         </section>
 
         <!--SCROLL REVEAL-->
         <script src="https://unpkg.com/scrollreveal"></script> 
-        
 
         <!--LINK TO JAVASCRIPT-->
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript">
+            // Menu icon functionality
+            let menu = document.querySelector('#menu-icon');
+            let navlist = document.querySelector('.navlist');
+            
+            menu.onclick = () => {
+                menu.classList.toggle('bx-x');
+                navlist.classList.toggle('active');
+            };
+            
+            window.onscroll = () => {
+                menu.classList.remove('bx-x');
+                navlist.classList.remove('active');
+            };
+            
+            // Scroll reveal animation
+            const sr = ScrollReveal({
+                distance: '45px',
+                duration: 2700,
+                reset: true
+            });
+            
+            sr.reveal('.home-text', {delay:350, origin:'left'});
+            sr.reveal('.profile-img', {delay:350, origin:'right'});
+            sr.reveal('.about, .Skills, .Certifications, .contact, .copyright', {delay:200, origin:'bottom'});
+        </script>
     </body>
 </html>
